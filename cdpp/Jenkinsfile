@@ -23,7 +23,10 @@ pipeline {
         stage('Run Application') {
             steps {
                 dir('cdpp') {
-                    powershell 'java -jar target/cdpp-0.0.1-SNAPSHOT.jar' // ← 빌드된 JAR 이름에 맞게 수정
+                    // 타임아웃을 5초로 설정
+                    timeout(time: 5, unit: 'SECONDS') {
+                        powershell 'java -jar target/cdpp-0.0.1-SNAPSHOT.jar' // 빌드된 JAR 이름에 맞게 수정
+                    }
                 }
             }
         }
