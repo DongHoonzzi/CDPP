@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    tools {
+        gradle ''  // Jenkins에 등록한 Gradle 이름
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo '🔨 Gradle 빌드 실행...'
+                sh './gradlew clean build'
+            }
+        }
+      /*  stage('Test') {
+            steps {
+                echo '🧪 테스트 중...'
+                sh './gradlew test'
+            }
+        }
+        */
+    }
+}
