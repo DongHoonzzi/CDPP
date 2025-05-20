@@ -2,22 +2,43 @@ pipeline {
     agent any
 
     tools {
-        gradle ''  // Jenkins에 등록한 Gradle 이름
+        // Maven 툴 이름을 Jenkins에서 등록한 Maven 이름으로 설정
+        maven 'Maven_3.8'  // 'Maven_3.8'은 Jenkins에서 설정한 Maven 이름
     }
 
     stages {
         stage('Build') {
             steps {
-                echo '🔨 Gradle 빌드 실행...'
-                sh './gradlew clean build'
+                echo '🔨 Maven 빌드 시작...'
+                // Maven 빌드를 실행합니다
+                sh 'mvn clean install'  // Maven 명령어로 빌드
             }
         }
-      /*  stage('Test') {
+
+        stage('Test') {
             steps {
-                echo '🧪 테스트 중...'
-                sh './gradlew test'
+                echo '🧪 테스트 실행 중...'
+                // Maven을 사용해 테스트를 실행합니다
+                sh 'mvn test'  // 테스트 실행
             }
         }
-        */
+
+        stage('Deploy') {
+            steps {
+                echo '🚀 배포 준비 중...'
+                // 배포 관련 명령어를 여기에 추가할 수 있습니다.
+                // 예: ssh 명령어, 서버로 파일 복사 등
+                // sh 'deploy.sh'  // 예시 배포 스크립트
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ 빌드 성공!'
+        }
+        failure {
+            echo '❌ 빌드 실패!'
+        }
     }
 }
