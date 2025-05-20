@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout SCM') {
             steps {
-                git url: 'https://github.com/DongHoonzzi/CDPP.git', credentialsId: 'github_token'
+                git url: 'https://github.com/DongHoonzzi/CDPP.git', branch: 'main', credentialsId: 'github_token'
             }
         }
         // 나머지 단계들...
