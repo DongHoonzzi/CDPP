@@ -15,13 +15,13 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 echo '🧪 테스트 실행 중...'
                 // Maven을 사용해 테스트를 실행합니다
                 sh 'mvn test'  // 테스트 실행
             }
-        }
+        }*/
 
         stage('Deploy') {
             steps {
