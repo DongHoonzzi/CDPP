@@ -9,17 +9,17 @@ pipeline {
             }
         }
 
-        // 2. Maven 빌드
+        // 2. Maven 빌드 (Windows에서는 PowerShell을 사용)
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                powershell 'mvn clean install'
             }
         }
 
-        // 3. Spring Boot 애플리케이션 실행
+        // 3. Spring Boot 애플리케이션 실행 (Windows에서는 PowerShell을 사용)
         stage('Run Application') {
             steps {
-                sh 'java -jar target/spring-boot-starter-parent.jar --server.port=8081'
+                powershell 'java -jar target/your-app-name-1.0.0.jar --server.port=8081'
             }
         }
     }
