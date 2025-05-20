@@ -1,11 +1,26 @@
 pipeline {
     agent any
+
     stages {
-        stage('Checkout SCM') {
+        // 1. 소스 코드 체크아웃
+        stage('Checkout') {
             steps {
                 git url: 'https://github.com/DongHoonzzi/CDPP.git', branch: 'main', credentialsId: 'github_token'
             }
         }
-        // 나머지 단계들...
+
+        // 2. Maven 빌드
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        // 3. Spring Boot 애플리케이션 실행
+        stage('Run Application') {
+            steps {
+                sh 'java -jar target/spring-boot-starter-parent.jar --server.port=8081'
+            }
+        }
     }
 }
